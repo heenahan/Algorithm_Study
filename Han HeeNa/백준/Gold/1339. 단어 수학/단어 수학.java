@@ -16,6 +16,7 @@ public class Main {
         Set<String> alphabetSet = new HashSet<>();
 
         for (int i = 0; i < n; i++) {
+            // base case에서 매번 split을 호출함으로써 시간초과 발생 -> 입력받자마자 split함
             formula.add(br.readLine().split(""));
             // 알파벳 넣기
             Arrays.stream(formula.get(i))
@@ -23,7 +24,7 @@ public class Main {
         }
 
         String[] alphabet = alphabetSet.toArray(String[]::new);
-        map = new HashMap<>();
+        map = new HashMap<>(); // 맵으로 저장
         visited = new boolean[10];
 
         backTracking(0, alphabet, formula);
@@ -35,7 +36,7 @@ public class Main {
     }
 
     static void backTracking(int n, String[] alphabet, List<String[]> formula) {
-        if (n == alphabet.length) {
+        if (n == alphabet.length) { // base case
             int sum = 0;
             for (String[] f : formula) {
                 int convert = 0;
@@ -45,6 +46,7 @@ public class Main {
                 }
                 sum += convert / 10;
             }
+            // 최대라면 교체
             max = Math.max(max, sum);
             return;
         }
