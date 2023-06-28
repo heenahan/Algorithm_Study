@@ -5,6 +5,7 @@ import java.util.function.*;
 public class Main {
 
     static String[] operator = { "+", "-", "*", "/" };
+    // 연산자 별 사칙연산
     static Map<String, BiFunction<Integer, Integer, Integer>> map = new HashMap<>(){{
         put("+", (a, b) -> { return a + b; });
         put("-", (a, b) -> { return a - b; });
@@ -45,15 +46,18 @@ public class Main {
             // 수식 모두 지정했으면 계산
             int calc = nums[0];
             for (int i = 0; i < formula.length; i++) {
+                // 맵에서 가져와서 계산
                 var fuc = map.get(formula[i]);
                 calc = fuc.apply(calc, nums[i + 1]);
             }
+            // 최대 최소 교체
             min = Math.min(min, calc);
             max = Math.max(max, calc);
             return;
         }
 
         for (int i = 0; i < 4; i++) {
+            // 연산자가 사용 가능하다면 
             if (operatorNum[i] > 0) {
                 formula[n] = operator[i];
                 operatorNum[i]--;
