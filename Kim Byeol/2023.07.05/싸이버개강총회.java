@@ -19,12 +19,12 @@ class Main {
                 .map(v-> makeMinute(v))
                 .collect(Collectors.toList());
 
-        int startTime = Integer.valueOf(time.get(0));
-        int endTime = Integer.valueOf(time.get(1));
-        int qTime = Integer.valueOf(time.get(2));
+        int startTime =time.get(0);
+        int endTime = time.get(1);
+        int qTime = time.get(2);
 
         String input ="";
-        while((input = br.readLine())!=null && !input.isEmpty()){
+        while((input = br.readLine())!=null){
             String[] man = input.split(" ");
             int manTime = makeMinute(man[0]);
             String manName = man[1];
