@@ -12,30 +12,31 @@ public class Main {
 
         int[] arr = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
 
+
         Map<Integer, Integer> map = new HashMap<>();
 
-        int r = 0;
-        int l = 0;
+        int left = 0;
+        int right = 0;
 
         int cnt = 0;
         int max = Integer.MIN_VALUE;
 
-        while (l < N) {
-            if (!map.containsKey(arr[l]) || map.get(arr[l]) < K) {
-                map.put(arr[l], map.getOrDefault(arr[l], 0) + 1);
-                l++;
+        while (right < N) {
+            if (!map.containsKey(arr[right]) || map.get(arr[right]) < K) {
+                map.put(arr[right], map.getOrDefault(arr[right], 0) + 1);
+                right++;
                 cnt++;
                 max = max < cnt ? cnt : max;
                 continue;
             }
 
-            if (map.get(arr[l]) == K) {
-                int removal = arr[l];
-                while (r <= l) {
-                    map.put(arr[r], map.get(arr[r]) - 1);
-                    r++;
+            if (map.get(arr[right]) == K) {
+                int removal = arr[right];
+                while (left <= right) {
+                    map.put(arr[left], map.get(arr[left]) - 1);
+                    left++;
                     cnt--;
-                    if (arr[r - 1] == removal) break;
+                    if (arr[left - 1] == removal) break;
                 }
             }
 
