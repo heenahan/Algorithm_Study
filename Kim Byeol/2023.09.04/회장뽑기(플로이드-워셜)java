@@ -1,0 +1,72 @@
+import java.util.*;
+import java.io.*;
+
+public class Main{
+
+    static final int INF = 987654321;
+
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+
+        int[][] relations = new int[N+1][N+1];
+
+        for(int i=1;i<=N;i++) {
+            for(int j=1;j<=N;j++) {
+                if(i!=j) {
+                    relations[i][j]=INF;
+                }
+            }
+        }
+
+        while(true) {
+            int[] inputs = Arrays.stream(br.readLine().split(" "))
+                    .mapToInt(Integer::parseInt).toArray();
+            if(inputs[0] == -1) {
+                break;
+            }
+            relations[inputs[0]][inputs[1]] =1;
+            relations[inputs[1]][inputs[0]] =1;
+        }
+
+        for(int m=1;m<=N;m++) {
+            for(int i=1;i<=N;i++) {
+                for(int j=1;j<=N;j++) {
+                    if(relations[i][j]>relations[i][m]+relations[m][j]) {
+                        relations[i][j] = relations[i][m]+relations[m][j];
+                    }
+                }
+            }
+        }
+
+        int min = INF;
+
+        int[] scoreArr = new int[N+1];
+
+        for(int i=1;i<=N;i++) {
+            int score =0;
+
+            for(int j=1;j<=N;j++){
+                if(relations[i][j]!=INF) {
+                    score = Math.max(score,relations[i][j]);
+                }
+            }
+            scoreArr[i] = score;
+            min = Math.min(min,score);
+        }
+
+        String answer = "";
+        int cnt =0;
+
+        for(int i=1;i<=N;i++) {
+            if(scoreArr[i]==min) {
+                answer+=" "+i;
+                cnt++;
+            }
+        }
+
+        System.out.println(min+" "+cnt);
+        System.out.println(answer.trim());
+    }
+
+}
