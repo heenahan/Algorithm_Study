@@ -31,13 +31,13 @@ class Solution {
                 long ad = (long) first[0] * second[1];
                 long bc = (long) first[1] * second[0];
                 
-                if (ad - bc == 0L) continue;
+                if (ad - bc == 0) continue;
                 
                 long mother = ad - bc;
                 long childX = (long) first[1] * second[2] - (long) first[2] * second[1];
                 long childY = (long) first[2] * second[0] - (long) first[0] * second[2];
                 
-                if (childX % mother != 0L || childY % mother != 0L) continue;
+                if (childX % mother != 0 || childY % mother != 0) continue;
                 
                 long x = childX / mother;
                 long y = childY / mother;
